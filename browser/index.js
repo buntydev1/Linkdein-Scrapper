@@ -6,7 +6,7 @@ async function startBrowser() {
   try {
     console.log("opening the browser.....");
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       // excetuablePath:
       //   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     });
@@ -17,10 +17,10 @@ async function startBrowser() {
     await page.waitFor(3000);
     await page.click("#session_key");
 
-    await page.keyboard.type("Enter_Your Email here");
+    await page.keyboard.type("");
     await page.click('[id="session_password"]');
 
-    await page.keyboard.type("Enter_Your Password here");
+    await page.keyboard.type("");
     await page.click('[type="submit"]');
     await page.waitFor(3000);
     await page.goto(
