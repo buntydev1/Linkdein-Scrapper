@@ -6,7 +6,7 @@ async function startBrowser() {
   try {
     console.log("opening the browser.....");
     browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       // excetuablePath:
       //   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     });
@@ -14,7 +14,7 @@ async function startBrowser() {
     // console.log("type of page", page);
     await page.goto("https://www.linkedin.com");
 
-    await page.waitFor(3000);
+    // await page.waitFor(3000);
     await page.click("#session_key");
 
     await page.keyboard.type("");
@@ -30,7 +30,8 @@ async function startBrowser() {
         waitUntil: "load",
       }
     );
-    // return;
+    var names = await page.waitForSelector(".search-results-container");
+    console.log("this is names", names);
   } catch (err) {
     console.log("Could not create a browser instance => :", err);
   }
