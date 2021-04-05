@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-
+const cherrio = require("cheerio");
 async function startBrowser() {
   let browser;
 
@@ -32,6 +32,23 @@ async function startBrowser() {
     );
     var names = await page.waitForSelector(".search-results-container");
     console.log("this is names", names);
+    const content = await page.content();
+    await getNameData(content);
+    console.log("this is content", content);
+
+    async function getNameData(html) {
+      const $ = cherrio.load(html);
+      $(".entity-result").each((i, element) => {
+        console.log(
+          $(element)
+            .find(
+              "div.entity-result__content entity-result__divider span.entity-result__title-text"
+            )
+            .find("span")
+            .text()
+        );
+      });
+    }
   } catch (err) {
     console.log("Could not create a browser instance => :", err);
   }
