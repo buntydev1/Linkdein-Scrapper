@@ -17,10 +17,10 @@ async function startBrowser() {
     // await page.waitFor(3000);
     await page.click("#session_key");
 
-    await page.keyboard.type("");
+    await page.keyboard.type("Enter_Email");
     await page.click('[id="session_password"]');
 
-    await page.keyboard.type("");
+    await page.keyboard.type("Enter_Password");
     await page.click('[type="submit"]');
     await page.waitFor(3000);
     await page.goto(
@@ -31,22 +31,30 @@ async function startBrowser() {
       }
     );
     var names = await page.waitForSelector(".search-results-container");
-    console.log("this is names", names);
+    // console.log("this is names", names);
     const content = await page.content();
     await getNameData(content);
-    console.log("this is content", content);
+    // console.log("this is content", content);
 
     async function getNameData(html) {
       const $ = cherrio.load(html);
+
       $(".entity-result").each((i, element) => {
-        console.log(
-          $(element)
-            .find(
-              "div.entity-result__content entity-result__divider span.entity-result__title-text"
-            )
-            .find("span")
-            .text()
-        );
+        const nameList = [];
+        console.log("this is ", element);
+        // console.log(
+        $(element)
+          .find("div.entity-result__content entity-result__divider ")
+          .find("span.entity-result__title")
+          .find("span.entity-result__title-line")
+          .find("span.entity-result__title-text")
+          .find("span.dir")
+          .find("span")
+          .each((i, element) => {
+            // nameList.push($(element).text());
+            console.log("this is element", element);
+          });
+        // );
       });
     }
   } catch (err) {
