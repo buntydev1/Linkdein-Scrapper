@@ -16,10 +16,10 @@ async function startBrowser() {
     // await page.waitFor(3000);
     await page.click("#session_key");
 
-    await page.keyboard.type("");
+    await page.keyboard.type("buntyvirani786@gmail.com");
     await page.click('[id="session_password"]');
 
-    await page.keyboard.type("");
+    await page.keyboard.type("Bunty7016071487");
     await page.click('[type="submit"]');
 
     await page.waitFor(3000);
@@ -32,18 +32,14 @@ async function startBrowser() {
       }
     );
 
-    await page.waitForSelector(".entity-result__item");
+    await page.waitForSelector("ul.reusable-search__entity-results-list");
 
-    // const getNames = await page.$$eval(
-    //   '.entity-result__title-text > a > span > span[aria-hidden="true"]',
-    //   (options) => options.map((option) => option.textContent)
-    // );
-    // console.log("getThemAll", getNames);
-    const getDesignation = await page.$$eval(
-      ".entity-result__item > div.entity-result__content > div > div > div:nth-child(2) > div.entity-result__primary-subtitle",
-      (option) => option.map((options) => options.innerText)
+    const options = await page.$$eval(
+      "li.reusable-search__result-container",
+      (options) => options.map((option) => option.innerText)
     );
-    console.log("getDesignation", getDesignation);
+
+    console.log("this is options", options);
   } catch (err) {
     console.log("Could not create a browser instance => :", err);
   }
