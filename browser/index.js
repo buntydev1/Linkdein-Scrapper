@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-// const cherrio = require("cheerio");
+var fs = require("fs");
 async function startBrowser() {
   let browser;
 
@@ -58,6 +58,14 @@ async function startBrowser() {
     );
 
     console.log("this is option", names);
+
+    const JSONOBJECT = JSON.stringify(names);
+    console.log("this is object", JSONOBJECT);
+
+    fs.writeFile("myjsonfile.json", JSONOBJECT, function (err) {
+      if (err) throw err;
+      console.log("complete");
+    });
   } catch (err) {
     console.log("Could not create a browser instance => :", err);
   }
