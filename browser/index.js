@@ -16,10 +16,10 @@ async function startBrowser() {
     // await page.waitFor(3000);
     await page.click("#session_key");
 
-    await page.keyboard.type("buntyvirani786@gmail.com");
+    await page.keyboard.type("");
     await page.click('[id="session_password"]');
 
-    await page.keyboard.type("Bunty7016071487");
+    await page.keyboard.type("");
     await page.click('[type="submit"]');
 
     await page.waitFor(3000);
@@ -31,15 +31,33 @@ async function startBrowser() {
         waitUntil: "load",
       }
     );
-
     await page.waitForSelector("ul.reusable-search__entity-results-list");
 
-    const options = await page.$$eval(
+    // const names = await page.$$eval(
+    //   "li.reusable-search__result-container",
+    //   (options) => options.map((option) => option.innerText)
+    // );
+    const names = await page.$$eval(
       "li.reusable-search__result-container",
-      (options) => options.map((option) => option.innerText)
+      (options) =>
+        options.map((option) => {
+          return (obj = {
+            name: option.querySelector(".entity-result__title-text > a ")
+              .innerText,
+            designation: option.querySelector(
+              ".entity-result__item > div.entity-result__content > div > div > div:nth-child(2) > div.entity-result__primary-subtitle"
+            ).innerText,
+            location: option.querySelector(
+              ".entity-result__item > div.entity-result__content > div > div >  div:nth-child(2) > div.entity-result__secondary-subtitle"
+            ).innerText,
+            profileURL: option.querySelector(
+              "div.entity-result__content > div > div > div> span > div > span > span > a"
+            ).href,
+          });
+        })
     );
 
-    console.log("this is options", options);
+    console.log("this is option", names);
   } catch (err) {
     console.log("Could not create a browser instance => :", err);
   }
