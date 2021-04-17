@@ -13,7 +13,11 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.5",
     "chromium": "^3.0.2",
+    "csv-stringify": "^5.6.2",
+    "csv-writer": "^1.6.0",
+    "csvjson": "^5.1.0",
     "json2csv": "^5.0.6",
+    "jsonexport": "^3.2.0",
     "puppeteer": "^8.0.0"
   }
 }
