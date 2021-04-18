@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
 const converToCSV = (employees) => {
   const array = [Object.keys(employees[0])].concat(employees);
@@ -97,21 +96,6 @@ async function startBrowser() {
         }
       );
 
-      // console.log("this is option", allData);
-
-      // const csvWriter = createCsvWriter({
-      //   path: "out.csv",
-      //   header: [
-      //     { id: "name", title: "Name" },
-      //     { id: "profileURL", title: "profileURL" },
-      //     { id: "designation", title: "Designation" },
-      //     { id: "location", title: "Location" },
-      //   ],
-      // });
-      // csvWriter
-      //   .writeRecords(allData)
-      //   .then(() => console.log("The CSV file was written successfully"));
-
       const csv = converToCSV(allData);
       // console.log("🚀 ~ file: index.js ~ line 100 ~ startBrowser ~ csv", csv);
 
@@ -121,7 +105,6 @@ async function startBrowser() {
       });
     }
   } catch (err) {
-    // await page.screenshot({ path: `screenshots/globalError.jpeg` });
     console.log("Could not create a browser instance => :", err);
   }
   return browser;
