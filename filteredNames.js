@@ -3,20 +3,14 @@
 var fs = require("fs");
 
 const data = require("./employees.json");
+const newData = require("./indianNames.json");
 
-// var uniqueValue = new Set(data);
+var jsonObject = newData.map(JSON.stringify);
 
-// var newdata = {};
-// newdata.table = [];
-// for (i = 0; i < uniqueValue.length; i++) {
-//   newdata.table.push(uniqueValue);
-// }
-jsonObject = data.map(JSON.stringify);
+var uniqueSet = new Set(jsonObject);
+var uniqueArray = Array.from(uniqueSet);
 
-uniqueSet = new Set(jsonObject);
-uniqueArray = Array.from(uniqueSet);
-
-fs.writeFile("input1.json", uniqueArray, function (error) {
+fs.writeFile("input2.json", uniqueArray, function (error) {
   if (error) {
     console.error("write error:  " + error.message);
   } else {
