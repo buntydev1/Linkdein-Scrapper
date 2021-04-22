@@ -23,10 +23,10 @@ const names = filtereDataIndians
 
 const indianNames = filtereDataEmployess.filter(
   (empl) => {
-    const emplArr = empl.name.split(" ");
+    const emplArr = empl.name.toLowerCase().split(" ");
     let decision = false;
     emplArr.forEach((emp) => {
-      console.log(" this is emp", emp);
+      // console.log(" this is emp", emp);
       if (names.includes(emp)) {
         // console.log("names", names);
         decision = true;
@@ -36,19 +36,16 @@ const indianNames = filtereDataEmployess.filter(
   }
   // names.includes(empl.name)
 );
-console.log(
-  "this is in",
-  indianNames.map((n) => n.name)
-);
+console.log("this is in", indianNames);
 // const data = require("./employees.json");
 // const newData = require("./indianNames.json");
 
-// var jsonObject = newData.map(JSON.stringify);
+// var jsonObject = indianNames.map(JSON.stringify);
 
 // var uniqueSet = new Set(jsonObject);
 // var uniqueArray = Array.from(uniqueSet);
 
-// fs.writeFile("input3.json", uniqueArray, function (error) {
+// fs.writeFile("filter.json", uniqueArray, function (error) {
 //   if (error) {
 //     console.error("write error:  " + error.message);
 //   } else {
